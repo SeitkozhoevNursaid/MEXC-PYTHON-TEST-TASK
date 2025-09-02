@@ -29,18 +29,11 @@ def place_order(key, obj, url):
     return response.json()
 
 
-key = "WEBc59...."
-
-obj = {
-    "symbol": "<SYMBOL_USDT>",
-    "side": 1,
-    "openType": 1,
-    "type": 1,
-    "vol": 2,
-    "leverage": 5,
-    "price": 1.2,
-}
-
-url = 'https://futures.mexc.com/api/v1/private/order/create'
-response = place_order(key, obj, url)
-print(response)
+def place_order_with_log(key, order_obj, url):
+    """Создаёт ордер и печатает результат"""
+    response = place_order(key, order_obj, url)
+    if response.get('success'):
+        print(f"Ордер успешно создан на аккаунте {key[:5]}...: {response}")
+    else:
+        print(f"Ошибка создания ордера на аккаунте {key[:5]}...: {response}")
+    return response
