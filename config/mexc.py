@@ -1,11 +1,12 @@
 import hashlib
 import json
 import time
-import os
 import requests
+
 
 def md5(value):
     return hashlib.md5(value.encode('utf-8')).hexdigest()
+
 
 def mexc_crypto(key, obj):
     date_now = str(int(time.time() * 1000))
@@ -13,6 +14,7 @@ def mexc_crypto(key, obj):
     s = json.dumps(obj, separators=(',', ':'))
     sign = md5(date_now + s + g)
     return {'time': date_now, 'sign': sign}
+
 
 def place_order(key, obj, url):
     signature = mexc_crypto(key, obj)
